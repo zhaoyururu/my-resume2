@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林薇 | 高级新媒体运营专家 · AIGC内容工业化架构师</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(18px);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #e2e8f0;
+            margin: 0; padding: 0;
+        }
+
+        /* 打印与PDF导出强制约束 */
+        @media print {
+            @page { size: A4; margin: 0; }
+            body { 
+                background: #0f172a !important; 
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important; 
+                width: 210mm; min-height: 297mm;
+            }
+            .print-container { width: 100% !important; max-width: none !important; padding: 18mm !important; }
+            .glass-card, .demo-link-card { 
+                break-inside: avoid; page-break-inside: avoid; 
+                box-shadow: none !important; transform: none !important; 
+            }
+            .aligned-row { break-inside: avoid; page-break-inside: avoid; }
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+        }
+
+        /* 可点击的演示卡片样式 */
+        .demo-link-card {
+            display: block;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .demo-link-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #67e8f9;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(103, 232, 249, 0.15);
+        }
+        .demo-link-card img { transition: transform 0.3s ease; }
+        .demo-link-card:hover img { transform: scale(1.05); }
+
+        .metric-badge {
+            font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem;
+            border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.4rem;
+        }
+        .metric-up { background: rgba(110, 231, 183, 0.15); color: #6ee7b7; }
+        .metric-neutral { background: rgba(167, 139, 250, 0.15); color: #a78bfa; }
+
+        .skill-tag {
+            font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.125rem; font-weight: 600; color: #cbd5e1;
+            margin-bottom: 1.25rem; padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        .project-tag { font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 4px; }
+        .tag-github { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+        .tag-demo { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+        .tag-business { background: rgba(236, 72, 153, 0.15); color: #ec4899; }
+
+        .cert-card { border-left: 3px solid; padding-left: 0.75rem; }
+        .cert-award { border-color: #67e8f9; }
+        .cert-honor { border-color: #a78bfa; }
+        .cert-scholar { border-color: #6ee7b7; }
+
+        .avatar {
+            width: 64px; height: 64px; border-radius: 16px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 24px; color: white; flex-shrink: 0;
+        }
+        
+        .icon-box {
+            width: 20px; height: 20px; border-radius: 4px; 
+            background: rgba(255,255,255,0.1); 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 10px; font-weight: bold; flex-shrink: 0;
+        }
+
+        /* 核心对齐系统：使用Flex + Stretch确保左右等高对齐 */
+        .aligned-row {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 24px;
+            align-items: stretch; /* 关键：强制左右两栏等高 */
+        }
+        .col-main { flex: 3; min-width: 0; display: flex; flex-direction: column; }
+        .col-side { 
+            flex: 1; min-width: 240px; max-width: 280px; 
+            display: flex; flex-direction: column; gap: 20px; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="print-container max-w-[210mm] mx-auto p-6 md:p-10 space-y-8">
+
+    <!-- ================= HEADER ================= -->
+    <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div class="flex items-center gap-4">
+            <div class="avatar">LW</div>
+            <div>
+                <h1 class="text-3xl md:text-4xl font-bold tracking-tight">林薇</h1>
+                <p class="text-lg text-gray-300 mt-1">高级新媒体运营专家 | AIGC内容工业化架构师</p>
+                <p class="text-sm text-gray-500 mt-1">“一人一部门”超级个体赋能者</p>
+            </div>
+        </div>
+        <div class="text-right space-y-1.5 text-sm">
+            <div class="flex items-center justify-end gap-2"><span class="text-gray-400">📞</span><span>138****5678</span></div>
+            <div class="flex items-center justify-end gap-2"><span class="text-gray-400">✉️</span><span>linwei.media@outlook.com</span></div>
+            <div class="flex items-center justify-end gap-2"><span class="text-gray-400">📍</span><span>杭州（可接受异地）</span></div>
+            <div class="flex items-center justify-end gap-2"><span class="text-gray-400">🔗</span><a href="#" class="text-purple-400 hover:underline">GitHub · 项目作品集</a></div>
+            <div class="flex items-center justify-end gap-2"><span class="text-gray-400">📝</span><a href="#" class="text-cyan-400 hover:underline">CSDN · 技术博客</a></div>
+        </div>
+    </header>
+
+    <!-- ================= CORE FOCUS & METRICS ================= -->
+    <div class="glass-card p-6">
+        <div class="flex flex-wrap items-center gap-3 text-sm text-gray-300">
+            <span class="font-medium text-white">专注三件事：</span>
+            <span>把重复劳动升级为“人 + AI 协同”内容流水线</span>
+            <span class="text-gray-600">·</span>
+            <span>把零散创意转化为可复制的SOP方法论</span>
+            <span class="text-gray-600">·</span>
+            <span>不止做内容，更能讲清楚、推得开、复得出来</span>
+        </div>
+        <p class="mt-3 text-gray-400 text-sm leading-relaxed">
+            从2023年入行判断“纯人工运营已到瓶颈”，到All-in AIGC内容工程——两年跨域构建，毕设有实物（3套自动化模板），获奖有记录（金瞳奖银奖），项目数据说话。
+        </p>
+    </div>
+
+    <div class="grid grid-cols-3 gap-6">
+        <div class="glass-card p-5 text-center">
+            <div class="text-3xl font-bold text-cyan-400">+145%</div>
+            <div class="text-xs text-gray-500 mt-1">账号粉丝增长</div>
+            <div class="text-xs text-gray-400 mt-1">某知识类抖音号 6个月</div>
+        </div>
+        <div class="glass-card p-5 text-center">
+            <div class="text-3xl font-bold text-purple-400">3h → 22min</div>
+            <div class="text-xs text-gray-500 mt-1">单条视频全流程耗时</div>
+            <div class="text-xs text-gray-400 mt-1">含脚本→拍摄→剪辑→发布</div>
+        </div>
+        <div class="glass-card p-5 text-center">
+            <div class="text-3xl font-bold text-emerald-400">5×24h</div>
+            <div class="text-xs text-gray-500 mt-1">AI自动值守轮次</div>
+            <div class="text-xs text-gray-400 mt-1">评论区智能应答+舆情监控</div>
+        </div>
+    </div>
+
+    <!-- ================= ROW 1: 实习经历 ↔ 技能栈 (强制对齐) ================= -->
+    <div class="aligned-row">
+        <!-- LEFT: Work Experience -->
+        <div class="col-main">
+            <h2 class="section-title"><div class="icon-box">W</div>实习经历</h2>
+            <div class="glass-card p-6 h-full">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">杭州知微智能内容科技有限公司</h3>
+                        <p class="text-cyan-300 font-medium mt-1">AI内容运营 · 短视频工业化组 · 全链路内容中台</p>
+                    </div>
+                    <span class="text-gray-500 text-sm whitespace-nowrap">2024.09 — 2025.06</span>
+                </div>
+                <ul class="space-y-3 text-gray-300 text-sm">
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></span>
+                        <span>主导「轻量级AIGC工作流」落地：将脚本生成→素材匹配→配音合成→字幕校对→发布排期全链路压缩至<mark class="bg-gray-800 px-1 rounded">22分钟/条</mark>，人力成本下降68%</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></span>
+                        <span>搭建「热点响应SOP」机制：接入百度/微博热榜API + LLM摘要提炼，实现<mark class="bg-gray-800 px-1 rounded">30分钟内</mark>产出可发布内容初稿，爆款率提升至37%</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></span>
+                        <span>开发「评论区智能应答矩阵」：基于意图识别+知识库检索，覆盖85%高频问题，人工介入率降至<mark class="bg-gray-800 px-1 rounded">12%</mark>，用户满意度+24%</span>
+                    </li>
+                </ul>
+                <div class="mt-5 flex flex-wrap gap-3">
+                    <span class="metric-badge metric-up"><span>↑</span> 粉丝增长 +145%</span>
+                    <span class="metric-badge metric-up"><span>↑</span> 内容效率 +60%</span>
+                    <span class="metric-badge metric-neutral"><span>→</span> 私域转化 +21%</span>
+                    <span class="metric-badge metric-up"><span>↑</span> 人均产能 ×3.2</span>
+                </div>
+                
+                <!-- 可点击的演示卡片 -->
+                <div class="mt-5 grid grid-cols-2 gap-4">
+                    <a href="https://dify.ai/" target="_blank" class="demo-link-card p-3">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=180&fit=crop" alt="Dify Workflow" class="w-full h-28 object-cover rounded-lg mb-2">
+                        <p class="text-xs text-cyan-300 font-medium">🔗 Dify Workflow 实战演示</p>
+                        <p class="text-[10px] text-gray-400 mt-0.5">点击查看多Agent协同生成脚本流程</p>
+                    </a>
+                    <a href="https://grafana.com/grafana/dashboards/" target="_blank" class="demo-link-card p-3">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=180&fit=crop" alt="Token Stats" class="w-full h-28 object-cover rounded-lg mb-2">
+                        <p class="text-xs text-cyan-300 font-medium">🔗 Token 消耗实时监控面板</p>
+                        <p class="text-[10px] text-gray-400 mt-0.5">点击查看单条视频成本 ↓42% 数据源</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Skills Stack -->
+        <aside class="col-side">
+            <div class="glass-card p-5 h-full">
+                <h3 class="font-semibold text-gray-300 flex items-center gap-2 mb-4"><div class="icon-box">S</div>技能栈</h3>
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">AIGC 平台</h4>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="skill-tag">Dify</span><span class="skill-tag">Coze</span><span class="skill-tag">通义千问</span><span class="skill-tag">文心一言</span><span class="skill-tag">即梦AI</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">内容中台</h4>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="skill-tag">Notion DB</span><span class="skill-tag">飞书多维表格</span><span class="skill-tag">Canva Pro</span><span class="skill-tag">剪映专业版</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">数据 & API</h4>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="skill-tag">新榜</span><span class="skill-tag">蝉妈妈</span><span class="skill-tag">Python</span><span class="skill-tag">GA4</span><span class="skill-tag">RESTful</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">基础设施</h4>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="skill-tag">Claude Code</span><span class="skill-tag">Cursor</span><span class="skill-tag">Docker</span><span class="skill-tag">Git</span><span class="skill-tag">ComfyUI</span><span class="skill-tag">SD</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">核心能力</h4>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="skill-tag">爆款选题策划</span><span class="skill-tag">人设IP孵化</span><span class="skill-tag">跨平台分发</span><span class="skill-tag">A/B测试</span><span class="skill-tag">舆情监测</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- ================= ROW 2: 项目经历 ↔ 教育/证书 (强制对齐) ================= -->
+    <div class="aligned-row">
+        <!-- LEFT: Projects -->
+        <div class="col-main">
+            <h2 class="section-title"><div class="icon-box">P</div>项目经历</h2>
+            
+            <!-- Project 1 -->
+            <div class="glass-card p-6 mb-6">
+                <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">OpenClaw · 自研 AI 技能插件框架</h3>
+                        <p class="text-cyan-300 font-medium mt-1">独立设计 · 2026.03</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="project-tag tag-github">GitHub 开源</span>
+                        <span class="project-tag tag-demo">可现场演示</span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm mb-4">可插拔 Skill 标准 · ClawHub 技能市场 · 3 个发布技能包</p>
+                <ul class="space-y-3 text-gray-300 text-sm">
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></span>
+                        <span>自研标准化技能框架（SKILL.md + README.md 接口规范），面向 AI 智能体平台的可插拔、可发现、可复用 Skill 体系</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></span>
+                        <span><strong>wechat-comic-factory</strong>：六阶段全自动漫画生产流水线，任务状态 JSON 持久化，支持断点续传</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></span>
+                        <span><strong>openclaw-16mbti</strong>：16 种 MBTI 人格风格动态切换，内置安全边界，拒绝招聘诊断等滥用场景</span>
+                    </li>
+                </ul>
+                
+                <!-- 可点击的项目演示卡片 -->
+                <div class="mt-5 grid grid-cols-3 gap-3">
+                    <a href="https://github.com/topics/wechat-bot" target="_blank" class="demo-link-card p-2 text-center">
+                        <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=300&h=160&fit=crop" alt="Demo" class="w-full h-24 object-cover rounded-lg mb-1">
+                        <p class="text-[10px] text-cyan-300 font-medium">🔗 技能演示效果</p>
+                    </a>
+                    <a href="https://draw.io/" target="_blank" class="demo-link-card p-2 text-center">
+                        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=300&h=160&fit=crop" alt="Flow" class="w-full h-24 object-cover rounded-lg mb-1">
+                        <p class="text-[10px] text-cyan-300 font-medium">🔗 工作流架构图</p>
+                    </a>
+                    <a href="https://code.visualstudio.com/" target="_blank" class="demo-link-card p-2 text-center">
+                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=160&fit=crop" alt="Env" class="w-full h-24 object-cover rounded-lg mb-1">
+                        <p class="text-[10px] text-cyan-300 font-medium">🔗 本地调试环境</p>
+                    </a>
+                </div>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="skill-tag">Python</span><span class="skill-tag">PowerShell</span><span class="skill-tag">WeChat API</span><span class="skill-tag">Pillow</span><span class="skill-tag">DeepSeek</span><span class="skill-tag">Claude API</span>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="glass-card p-6">
+                <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">GEO 生成式引擎优化自动化系统</h3>
+                        <p class="text-cyan-300 font-medium mt-1">业务验证 · 2025</p>
+                    </div>
+                    <span class="project-tag tag-business">已落地应用</span>
+                </div>
+                <p class="text-gray-400 text-sm mb-4">让 AI 搜索引擎主动引用内容 · 四层工程流水线 · 数据驱动迭代</p>
+                <ul class="space-y-3 text-gray-300 text-sm">
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></span>
+                        <span>将 GEO 优化经验转化为可自动执行的系统：关键词测试 → Q-A-Why-Limit 结构化内容生成 → 分发调度 → 引用率回收验证</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></span>
+                        <span>JSON 中间文件支持断点续传，Prompt 模板模块化；覆盖 20+ 平台，曝光持续 30 天以上</span>
+                    </li>
+                </ul>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="metric-badge metric-up"><span>↑</span> 平台曝光 +120%</span>
+                    <span class="metric-badge metric-up"><span>↑</span> 模型引用命中率 +100%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Education + Certs + Core Abilities -->
+        <aside class="col-side">
+            <!-- Education -->
+            <div class="glass-card p-5">
+                <h3 class="font-semibold text-gray-300 flex items-center gap-2 mb-4"><div class="icon-box">E</div>教育背景</h3>
+                <div class="space-y-2">
+                    <p class="text-white font-medium">本科 · 机械电子工程</p>
+                    <p class="text-cyan-300 text-sm">院学生会主席 · 社团负责人</p>
+                    <p class="text-gray-400 text-xs">多项赛事 & 项目负责人</p>
+                </div>
+            </div>
+
+            <!-- Certificates -->
+            <div class="glass-card p-5">
+                <h3 class="font-semibold text-gray-300 flex items-center gap-2 mb-4"><div class="icon-box">H</div>荣誉证书</h3>
+                <div class="space-y-3">
+                    <div class="cert-card cert-award">
+                        <div class="font-medium text-yellow-400 text-xs flex items-center gap-1">🏆 全国智能体赛 省级二等奖</div>
+                        <div class="text-[10px] text-gray-500 mt-0.5">2025.11 · 主导AIGC内容系统</div>
+                    </div>
+                    <div class="cert-card cert-honor">
+                        <div class="font-medium text-blue-400 text-xs flex items-center gap-1">🎓 大学生创业团队 省级二等奖</div>
+                        <div class="text-[10px] text-gray-500 mt-0.5">2024.06 · “知微内容工场”</div>
+                    </div>
+                    <div class="cert-card cert-scholar">
+                        <div class="font-medium text-amber-400 text-xs flex items-center gap-1">📚 国家励志奖学金 ×2</div>
+                        <div class="text-[10px] text-gray-500 mt-0.5">2023 & 2024 学年</div>
+                    </div>
+                    <div class="cert-card cert-award">
+                        <div class="font-medium text-cyan-400 text-xs flex items-center gap-1">🤖 百度&讯飞 Prompt工程师认证</div>
+                        <div class="text-[10px] text-gray-500 mt-0.5">2025.02 · 全国首批持证者</div>
+                    </div>
+                    <div class="cert-card cert-honor">
+                        <div class="font-medium text-indigo-400 text-xs flex items-center gap-1">📜 综合素质 A 级证书</div>
+                        <div class="text-[10px] text-gray-500 mt-0.5">全校前 5%</div>
+                    </div>
+                    <div class="cert-card cert-honor">
+                        <div class="font-medium text-rose-400 text-xs flex items-center gap-1">⭐ 市级优秀学生干部</div>
+                        <div class="text-[10px] text-gray-500 mt-0.5">2024</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Abilities -->
+            <div class="glass-card p-5">
+                <h3 class="font-semibold text-gray-300 flex items-center gap-2 mb-4"><div class="icon-box">C</div>核心能力</h3>
+                <div class="grid grid-cols-1 gap-2 text-xs">
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>AIGC工作流设计</div>
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>跨平台内容分发</div>
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>数据驱动优化</div>
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>人设IP孵化</div>
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>舆情监控响应</div>
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>爆款内容复刻</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="pt-6 pb-4 text-center text-gray-600 text-xs border-t border-white/5">
+        <p>© 2025 林薇 | 本简历采用「玻璃拟态 + 数据可视化」设计语言</p>
+        <p class="mt-1">所有演示卡片均可点击跳转 · 可提供 PDF / Figma 源文件</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
